@@ -1,18 +1,12 @@
 # server.R
 
-# library(maps)
-# library(mapproj)
-# source("plotscores.R")
-# counties <- readRDS("data/counties.rds")
-
-
 ####################################################
-library(mirt)
+require(mirt)
 
-options(shiny.error = browser)
-F2<-readRDS("Mod2F.RDS")
-fact1<-readRDS("Mod_dim1.RDS")
-fact2<-readRDS("Mod_dim2.RDS")
+#options(shiny.error = browser)
+F2<-readRDS("data/Mod2F.RDS")
+# fact1<-readRDS("data/Mod_dim1.RDS")
+# fact2<-readRDS("data/Mod_dim2.RDS")
 source("functions.R")
 
 
@@ -55,7 +49,7 @@ shinyServer(function(input, output) {
       
       resp2<-newData()
 
-       scoring(input=resp2)
+       scoring(F2,input=resp2)
 
       
     })
@@ -66,7 +60,7 @@ shinyServer(function(input, output) {
     output$plot123<-renderPlot({
       
       resp2<-newData()
-      res<-scoring(resp2)
+      res<-scoring(F2,input=resp2)
       
       plotscore(res$scoresF1[1],c("Psycho-Social Symptoms Subscale"))
       
@@ -75,7 +69,7 @@ shinyServer(function(input, output) {
     output$plot1234<-renderPlot({
       
       resp2<-newData()
-      res<-scoring(resp2)
+      res<-scoring(F2,input=resp2)
       
       plotscore(res$scoresF2[1],c("Physical Symptoms Subscale"))
       
@@ -90,23 +84,23 @@ shinyServer(function(input, output) {
 
     output$tex <- renderUI({
         resp2<-newData()
-        res<-scoring(resp2)
+        res<-scoring(F2,input=resp2)
     
           if(res$color[1]=="green"){
     
-              includeHTML("Green_phys.html")
+              includeHTML("www/Green_phys.html")
             
           }else if(res$color[1]=="yellow"){
               
-            includeHTML("Yellow_phys.html")
+            includeHTML("www/Yellow_phys.html")
             
           }else if(res$color[1]=="red"){
             
-            includeHTML("Red_phys.html")
+            includeHTML("www/Red_phys.html")
             
           }else{
             
-            includeHTML("Please_intput.html")
+            includeHTML("www/Please_intput.html")
           }
 
 
@@ -114,19 +108,19 @@ shinyServer(function(input, output) {
     
     output$tex2 <- renderUI({
           resp2<-newData()
-          res<-scoring(resp2)
+          res<-scoring(F2,resp2)
           
           if(res$color[2]=="green"){
             
-            includeHTML("Green_psych.html")
+            includeHTML("www/Green_psych.html")
             
           }else if(res$color[2]=="yellow"){
             
-            includeHTML("Yellow_psych.html")
+            includeHTML("www/Yellow_psych.html")
             
           }else if(res$color[2]=="red"){
             
-            includeHTML("Red_psych.html")
+            includeHTML("www/Red_psych.html")
             
           }else{
             

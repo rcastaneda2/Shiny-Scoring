@@ -64,8 +64,8 @@ warning.labels<-function(warn1,warn2){
 
 
 
-scoring<-function(input){
-  
+scoring<-function(mod,input){
+  F2<-mod
   pattern<-input
   scores1<-fscores(F2,method="EAP",response.pattern=pattern)
   color<-c("blank","blank")
