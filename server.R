@@ -4,7 +4,7 @@
 require(mirt)
 
 #options(shiny.error = browser)
-F2<-readRDS("data/Mod2F.RDS")
+F2<-readRDS("data/F2_2.RDS")
 # fact1<-readRDS("data/Mod_dim1.RDS")
 # fact2<-readRDS("data/Mod_dim2.RDS")
 source("functions.R")
